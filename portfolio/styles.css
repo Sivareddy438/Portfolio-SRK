@@ -1,0 +1,693 @@
+/* ===============================
+   STEP 1: THEME VARIABLES
+   =============================== */
+
+/* DARK THEME (DEFAULT) */
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --text: #e6edf3;
+  --muted: #9aa4ad;
+  --accent: #23ed6d;
+  --border: rgba(255, 255, 255, 0.08);
+}
+
+/* LIGHT THEME */
+html[data-theme="light"] {
+  --bg: #f8fafc;
+  --panel: #ffffff;
+  --text: #0f172a;
+  --muted: #6b7280;
+  --accent: #2563eb;
+  --border: rgba(0, 0, 0, 0.1);
+}
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===============================
+   STEP 2: GLOBAL RESET
+   =============================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* ===============================
+   STEP 3: COMMON ELEMENTS
+   =============================== */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.section {
+  max-width: 1100px;
+  margin: auto;
+  padding: 3rem 1rem;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.accent {
+  color: var(--accent);
+}
+
+/* ===============================
+   STEP 4: BUTTONS
+   =============================== */
+
+.btn {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn.primary {
+  background: var(--accent);
+  color: #001;
+}
+
+.btn.ghost {
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+/* ===============================
+   FINAL CLEAN CENTERED HEADER
+=============================== */
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2000;
+
+  padding: 1.2rem 1rem;
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+/* Menu button - top left */
+.menu-btn {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  font-size: 1.4rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* Theme button - top right */
+.theme-btn {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.theme-btn img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Center brand content */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.brand-name {
+  font-size: 1.7rem;
+  font-weight: 650;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.brand-role {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* Contact below name */
+.brand-contact {
+  margin-top: 6px;
+  font-size: 0.90rem;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  color: var(--muted);
+}
+
+.brand-contact a {
+  color: var(--muted);
+  transition: 0.3s ease;
+}
+
+.brand-contact a:hover {
+  color: var(--accent);
+}
+/* ===============================
+   STEP 6: SIDEBAR
+   =============================== */
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.2rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 3000;   
+  box-shadow: 8px 0 25px rgba(0,0,0,0.4);
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.sidebar-nav a:hover {
+  color: var(--accent);
+  font-weight: 500;
+}
+
+/* ===============================
+   SIDEBAR OVERLAY (BLUR BACKGROUND)
+   =============================== */
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2500;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+/* ===============================
+   STEP 7: HERO SECTION
+   =============================== */
+
+.hero {
+  max-width: 1100px;
+  margin: auto;
+  padding: 10rem 1rem 4rem;
+
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  object-fit: cover;
+  animation: floatImage 4s ease-in-out infinite;
+  box-shadow: 0 0 25px rgba(35, 237, 109, 0.4);
+  transition: 0.4s ease;
+}
+.hero-avatar:hover {
+  box-shadow: 0 0 40px var(--accent);
+  transform: scale(1.05);
+}
+/* Floating animation */
+@keyframes floatImage {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.hero-text {
+  color: var(--muted);
+  margin: 0.5rem 0;
+}
+
+.hero-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+/* HERO CONTACT INFO */
+
+.hero-contact {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  color: var(--muted);
+}
+
+.hero-contact a {
+  text-decoration: none;
+  color: var(--muted);
+  transition: 0.3s ease;
+}
+
+.hero-contact a:hover {
+  color: var(--accent);
+}
+
+.hero-contact span {
+  opacity: 0.5;
+}
+
+/* HERO TEXT ANIMATION */
+
+.hero-content {
+  animation: fadeSlideUp 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    transform: translateY(25px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+/* ===============================
+   STEP 8: SKILLS
+   =============================== */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.chip {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.skills-heading {
+  margin-top: 2rem;
+  margin-bottom: 1rem;  /* This creates space below heading */
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* ===============================
+   STEP 9: PROJECT CARDS
+   =============================== */
+
+.project-card {
+  background: linear-gradient(
+    180deg,
+    var(--panel),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.6rem;
+  margin-bottom: 2rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+}
+.project-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.project-card .brief {
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
+  color: var(--muted);
+}
+
+.project-card p,
+.project-card li {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.project-card ul {
+  margin-left: 1.2rem;
+  margin-bottom: 0.6rem;
+}
+.project-links {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.project-links a {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.project-preview {
+  margin-top: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.project-preview img {
+  width: 100%;
+  max-width: 350px;   /* Controls size */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.preview-text {
+  padding: 0.4rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+/* ===============================
+   READ MORE PROJECTS
+   =============================== */
+.pbi-embed-container {
+  margin-top: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.pbi-embed-container iframe {
+  width: 100%;
+  min-height: 450px; 
+}
+.more {
+  display: none;
+  margin-top: 0.5rem;
+}
+
+.more.open {
+  display: block;
+}
+
+.read-more-btn {
+  margin-top: 0.7rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--accent);
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.read-more-btn:hover {
+  background: var(--accent);
+  color: #001;
+}
+/* ===============================
+   STEP 10: LISTS
+   =============================== */
+
+.list {
+  margin-left: 1.2rem;
+  color: var(--muted);
+}
+
+/* ===============================
+   CONTACT FORM PREMIUM ANIMATION
+=============================== */
+
+.contact-form {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Input wrapper */
+.input-group {
+  position: relative;
+}
+
+/* Input styles */
+.input-group input,
+.input-group textarea {
+  width: 100%;
+  padding: 0.9rem 0.8rem;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  outline: none;
+  transition: 0.3s ease;
+}
+
+/* Floating label */
+.input-group label {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: 0.3s ease;
+  background: var(--panel);
+  padding: 0 5px;
+}
+
+/* Focus glow */
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(35, 237, 109, 0.3);
+}
+
+/* Float effect */
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group textarea:focus + label,
+.input-group textarea:valid + label {
+  top: -8px;
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+
+/* Submit button animation */
+.submit-btn {
+  transition: 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(35, 237, 109, 0.4);
+}
+/* ===============================
+   STEP 12: FOOTER
+   =============================== */
+
+.footer {
+  border-top: 1px solid var(--border);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  color: var(--muted);
+}
+
+.footer-links {
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  margin: 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+/* ===============================
+   STEP 13: MOBILE RESPONSIVE
+   =============================== */
+
+@media (max-width: 700px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-avatar {
+    margin: auto;
+  }
+}
+
+/* ===============================
+   STEP 14: Mobile Menu Adjustments*/
+
+   @media (max-width: 600px) {
+  .topbar {
+    padding: 0.6rem 0.8rem;
+  }
+
+  .brand-name {
+    font-size: 1rem;
+  }
+
+  .brand-role {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 600px) {
+  .project-card {
+    padding: 1.2rem;
+  }
+
+  .project-card h3 {
+    font-size: 1.05rem;
+  }
+}
+@media (max-width: 600px) {
+  .project-preview img {
+    max-height: 220px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+@media (max-width: 600px) {
+  .section {
+    padding: 2.2rem 1rem;
+  }
+
+  .project-card p,
+  .project-card li {
+    font-size: 0.9rem;
+  }
+}
+/* ===============================
+   SIMPLE FADE SLIDE ANIMATION
+=============================== */
+
+.education-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeSlide 0.8s ease forwards;
+}
+
+.education-animate:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.education-animate:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.education-animate:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeSlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* ===============================
+   FIX FOR FIXED HEADER SCROLL
+=============================== */
+
+section {
+  scroll-margin-top: 220px;
+}
