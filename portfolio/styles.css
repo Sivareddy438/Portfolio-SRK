@@ -595,8 +595,9 @@ a {
   }
 
   .theme-btn {
+    position: absolute;
     top: 15px;
-    right: 15px;
+    right: 20px;
   }
 
   .brand-name {
@@ -618,9 +619,10 @@ a {
 /* ===============================
    STEP 14: Mobile Menu Adjustments*/
 
-   @media (max-width: 600px) {
+@media (max-width: 600px) {
+
   .topbar {
-    padding: 0.6rem 0.8rem;
+    padding: 0.8rem 0.8rem;
   }
 
   .brand-name {
@@ -630,52 +632,28 @@ a {
   .brand-role {
     font-size: 0.75rem;
   }
-}
-@media (max-width: 600px) {
-  .project-card {
-    padding: 1.2rem;
+
+  .brand-contact {
+    display: none; /* Hide in header for clean look */
   }
 
-  .project-card h3 {
-    font-size: 1.05rem;
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 8rem 1rem 3rem;
   }
-}
-@media (max-width: 600px) {
-  .project-preview img {
-    max-height: 220px;
-    object-fit: cover;
-  }
-}
 
-@media (max-width: 600px) {
-  .hero-actions {
-    justify-content: center;
+  .hero-avatar {
+    margin: 0 auto 1rem;
   }
 
   .btn {
     width: 100%;
     text-align: center;
   }
-}
 
-@media (max-width: 600px) {
-  .hero-actions {
-    justify-content: center;
-  }
-
-  .btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-@media (max-width: 600px) {
-  .section {
-    padding: 2.2rem 1rem;
-  }
-
-  .project-card p,
-  .project-card li {
-    font-size: 0.9rem;
+  section {
+    scroll-margin-top: 120px;
   }
 }
 /* ===============================
